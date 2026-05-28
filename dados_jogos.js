@@ -12,6 +12,7 @@ const copaDoMundo = [
             {mandante: "África do Sul", visitante: "Coreia do Sul", data: "24/06/2026", hora: "22:00"},
         ]
     },
+
     {
         nomeGrupo: "Grupo B",
         jogos: [
@@ -23,6 +24,7 @@ const copaDoMundo = [
             {mandante: "Bósnia e Herzegovina", visitante: "Catar", data: "24/06/2026", hora: "16:00"},
         ]
     },
+
     {
         nomeGrupo: "Grupo C",
         jogos: [
@@ -34,6 +36,7 @@ const copaDoMundo = [
             {mandante: "Marrocos", visitante: "Haiti", data: "24/06/2026", hora: "19:00"},
         ]
     },
+
     {
         nomeGrupo: "Grupo D",
         jogos: [
@@ -45,6 +48,7 @@ const copaDoMundo = [
             {mandante: "Paraguai", visitante: "Austrália", data: "25/06/2026", hora: "23:00"},
         ]
     },
+
     {
         nomeGrupo: "Grupo E",
         jogos: [
@@ -56,6 +60,7 @@ const copaDoMundo = [
             {mandante: "Curaçao", visitante: "Costa do Marfim", data: "25/06/2026", hora: "17:00"},
         ]
     },
+
     {
         nomeGrupo: "Grupo F",
         jogos: [
@@ -67,6 +72,7 @@ const copaDoMundo = [
             {mandante: "Japão", visitante: "Suécia", data: "25/06/2026", hora: "20:00"},
         ]
     },
+
     {
         nomeGrupo: "Grupo G",
         jogos: [
@@ -78,6 +84,7 @@ const copaDoMundo = [
             {mandante: "Egito", visitante: "Irã", data: "27/06/2026", hora: "00:00"},
         ]
     },
+
     {
         nomeGrupo: "Grupo H",
         jogos: [
@@ -89,6 +96,7 @@ const copaDoMundo = [
             {mandante: "Cabo Verde", visitante: "Arábia Saudita", data: "26/06/2026", hora: "21:00"},
         ]
     },
+
     {
         nomeGrupo: "Grupo I",
         jogos: [
@@ -100,6 +108,7 @@ const copaDoMundo = [
             {mandante: "Senegal", visitante: "Iraque", data: "26/06/2026", hora: "16:00"},
         ]
     },
+
     {
         nomeGrupo: "Grupo J",
         jogos: [
@@ -111,6 +120,7 @@ const copaDoMundo = [
             {mandante: "Argélia", visitante: "Áustria", data: "27/06/2026", hora: "23:00"},
         ]
     },
+
     {
         nomeGrupo: "Grupo K",
         jogos: [
@@ -122,6 +132,7 @@ const copaDoMundo = [
             {mandante: "Congo", visitante: "Uzbesquistão", data: "27/06/2026", hora: "20:30"},
         ]
     },
+
     {
         nomeGrupo: "Grupo L",
         jogos: [
@@ -137,33 +148,22 @@ const copaDoMundo = [
 
 let dados = JSON.parse(fs.readFileSync('dados.json', 'utf8'));
 
-// Format date
 function formatDate(d) {
     const parts = d.split('/');
     return `${parts[2]}-${parts[1]}-${parts[0]}`;
 }
 
-// Update group matches
 dados.fixtures.groupStage = [];
 let matchIdCounter = 1;
 
 copaDoMundo.forEach(g => {
     const groupId = g.nomeGrupo.replace("Grupo ", "");
-    // Get team mapping
     const groupData = dados.groups.find(x => x.id === groupId);
     
-    // We need to match names from script to codes.
-    // Let's create a map based on order or name
-    // Since names might differ slightly (e.g. Holanda vs Países Baixos, Republica Tcheca vs Tchéquia), 
-    // let's do a manual map just in case or try to use the teams array directly since they should be in the same group.
     let teamMap = {};
     const scriptTeams = [...new Set(g.jogos.flatMap(j => [j.mandante, j.visitante]))];
     
-    // Attempt mapping
     scriptTeams.forEach((st, i) => {
-        // Just map them by assuming the teams in the script matches the teams in dados.json somehow, or just store the names if codes are too hard.
-        // Actually, in app.js/dados.json they use home: "MEX", away: "RSA"
-        // Let's create a hardcoded map of names from script to codes
         const codeMap = {
             "México": "MEX", "África do Sul": "RSA", "Coreia do Sul": "KOR", "Republica Tcheca": "CZE",
             "Canadá": "CAN", "Bósnia e Herzegovina": "BIH", "Catar": "QAT", "Suiça": "SUI",
@@ -200,7 +200,6 @@ copaDoMundo.forEach(g => {
     });
 });
 
-// Update Knockout Matches
 const knockoutData = [
     // 32 avos
     { id: "M73", phase: "32avos de final", homeSlot: "1E", awaySlot: "3A/B/C/D/F", date: "2026-06-29", time: "17:30" },

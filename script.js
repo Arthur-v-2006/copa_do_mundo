@@ -414,13 +414,6 @@ function renderSchedulePage(state) {
   }).join("");
 
   container.innerHTML = `
-    <section class="section-card note-card">
-      <strong>Atualização simples</strong>
-      <p>
-        Para trocar qualquer resultado, altere os campos de placar em <strong>dados.json</strong>.
-        A agenda abaixo e a classificação na página inicial são recalculadas automaticamente.
-      </p>
-    </section>
 
     <section class="schedule-grid">
       ${groupStageMarkup}
@@ -456,11 +449,10 @@ function renderKnockoutPage(state) {
 
   container.innerHTML = `
     <section class="section-card note-card">
-      <strong>Formato Copa 2026 — 32 avos de final</strong>
+      <strong>Formato Copa 2026</strong>
       <p>
-        Com 48 seleções, a chave começa nos <strong>32 avos de final</strong> (16 jogos) e segue para oitavas, quartas, semifinais e final.
-        Os 12 líderes, 12 vice-líderes e os 8 melhores terceiros colocados formam os 32 classificados.
-        Se um resultado ainda não existir no JSON, o slot permanece como <strong>A definir</strong>.
+        Com 48 seleções, a chave começa nos 32 avos de final e segue para oitavas, quartas, semifinais e final.
+        Os 12 líderes, 12 vice-líderes e os 8 melhores terceiros colocados formam os 32 classificados
       </p>
     </section>
 
@@ -468,7 +460,7 @@ function renderKnockoutPage(state) {
       <div class="section-header">
         <div>
           <h2>Classificados (32 seleções)</h2>
-          <p>Lista dinâmica com líderes, vice-líderes e melhores terceiros colocados.</p>
+          <p>Lista dinâmica com líderes, vice-líderes e melhores terceiros colocados</p>
         </div>
       </div>
       <div class="qualified-grid">

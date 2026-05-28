@@ -19,16 +19,19 @@
           "name": "México",
           "flagCode": "mx"
         },
+
         {
           "code": "RSA",
           "name": "África do Sul",
           "flagCode": "za"
         },
+
         {
           "code": "KOR",
           "name": "Coreia do Sul",
           "flagCode": "kr"
         },
+
         {
           "code": "CZE",
           "name": "Tchéquia",
@@ -36,6 +39,7 @@
         }
       ]
     },
+
     {
       "id": "B",
       "teams": [
@@ -44,16 +48,19 @@
           "name": "Canadá",
           "flagCode": "ca"
         },
+
         {
           "code": "BIH",
           "name": "Bósnia e Herzegovina",
           "flagCode": "ba"
         },
+
         {
           "code": "QAT",
           "name": "Catar",
           "flagCode": "qa"
         },
+
         {
           "code": "SUI",
           "name": "Suíça",
@@ -61,6 +68,7 @@
         }
       ]
     },
+
     {
       "id": "C",
       "teams": [
@@ -69,16 +77,19 @@
           "name": "Brasil",
           "flagCode": "br"
         },
+
         {
           "code": "MAR",
           "name": "Marrocos",
           "flagCode": "ma"
         },
+
         {
           "code": "HAI",
           "name": "Haiti",
           "flagCode": "ht"
         },
+
         {
           "code": "SCO",
           "name": "Escócia",
@@ -86,6 +97,7 @@
         }
       ]
     },
+
     {
       "id": "D",
       "teams": [
@@ -94,16 +106,19 @@
           "name": "Estados Unidos",
           "flagCode": "us"
         },
+
         {
           "code": "PAR",
           "name": "Paraguai",
           "flagCode": "py"
         },
+
         {
           "code": "AUS",
           "name": "Austrália",
           "flagCode": "au"
         },
+
         {
           "code": "TUR",
           "name": "Turquia",
@@ -111,6 +126,7 @@
         }
       ]
     },
+
     {
       "id": "E",
       "teams": [
@@ -119,16 +135,19 @@
           "name": "Alemanha",
           "flagCode": "de"
         },
+
         {
           "code": "CUW",
           "name": "Curaçao",
           "flagCode": "cw"
         },
+
         {
           "code": "CIV",
           "name": "Costa do Marfim",
           "flagCode": "ci"
         },
+
         {
           "code": "ECU",
           "name": "Equador",
@@ -136,6 +155,7 @@
         }
       ]
     },
+
     {
       "id": "F",
       "teams": [
@@ -144,16 +164,19 @@
           "name": "Países Baixos",
           "flagCode": "nl"
         },
+
         {
           "code": "JPN",
           "name": "Japão",
           "flagCode": "jp"
         },
+
         {
           "code": "SWE",
           "name": "Suécia",
           "flagCode": "se"
         },
+
         {
           "code": "TUN",
           "name": "Tunísia",
@@ -161,6 +184,7 @@
         }
       ]
     },
+
     {
       "id": "G",
       "teams": [
@@ -169,16 +193,19 @@
           "name": "Bélgica",
           "flagCode": "be"
         },
+
         {
           "code": "EGY",
           "name": "Egito",
           "flagCode": "eg"
         },
+
         {
           "code": "IRN",
           "name": "Irã",
           "flagCode": "ir"
         },
+
         {
           "code": "NZL",
           "name": "Nova Zelândia",
@@ -186,6 +213,7 @@
         }
       ]
     },
+
     {
       "id": "H",
       "teams": [
@@ -194,16 +222,19 @@
           "name": "Espanha",
           "flagCode": "es"
         },
+        
         {
           "code": "CPV",
           "name": "Cabo Verde",
           "flagCode": "cv"
         },
+
         {
           "code": "KSA",
           "name": "Arábia Saudita",
           "flagCode": "sa"
         },
+
         {
           "code": "URU",
           "name": "Uruguai",
@@ -211,6 +242,7 @@
         }
       ]
     },
+
     {
       "id": "I",
       "teams": [
@@ -219,16 +251,19 @@
           "name": "França",
           "flagCode": "fr"
         },
+
         {
           "code": "SEN",
           "name": "Senegal",
           "flagCode": "sn"
         },
+
         {
           "code": "IRQ",
           "name": "Iraque",
           "flagCode": "iq"
         },
+
         {
           "code": "NOR",
           "name": "Noruega",
@@ -236,6 +271,7 @@
         }
       ]
     },
+
     {
       "id": "J",
       "teams": [
@@ -244,16 +280,19 @@
           "name": "Argentina",
           "flagCode": "ar"
         },
+
         {
           "code": "ALG",
           "name": "Argélia",
           "flagCode": "dz"
         },
+
         {
           "code": "AUT",
           "name": "Áustria",
           "flagCode": "at"
         },
+
         {
           "code": "JOR",
           "name": "Jordânia",
@@ -261,6 +300,7 @@
         }
       ]
     },
+
     {
       "id": "K",
       "teams": [
@@ -269,16 +309,19 @@
           "name": "Portugal",
           "flagCode": "pt"
         },
+
         {
           "code": "COD",
           "name": "RD Congo",
           "flagCode": "cd"
         },
+
         {
           "code": "UZB",
           "name": "Uzbequistão",
           "flagCode": "uz"
         },
+
         {
           "code": "COL",
           "name": "Colômbia",
@@ -286,6 +329,7 @@
         }
       ]
     },
+
     {
       "id": "L",
       "teams": [
@@ -294,16 +338,19 @@
           "name": "Inglaterra",
           "flagCode": "gb-eng"
         },
+
         {
           "code": "CRO",
           "name": "Croácia",
           "flagCode": "hr"
         },
+
         {
           "code": "GHA",
           "name": "Gana",
           "flagCode": "gh"
         },
+
         {
           "code": "PAN",
           "name": "Panamá",
@@ -312,6 +359,7 @@
       ]
     }
   ],
+
   "fixtures": {
     "groupStage": [
       {
@@ -327,6 +375,7 @@
           "away": null
         }
       },
+
       {
         "id": "A2",
         "group": "A",
@@ -340,6 +389,7 @@
           "away": null
         }
       },
+
       {
         "id": "A3",
         "group": "A",
@@ -353,6 +403,7 @@
           "away": null
         }
       },
+
       {
         "id": "A4",
         "group": "A",
@@ -366,6 +417,7 @@
           "away": null
         }
       },
+
       {
         "id": "A5",
         "group": "A",
@@ -379,6 +431,7 @@
           "away": null
         }
       },
+
       {
         "id": "A6",
         "group": "A",
@@ -392,6 +445,7 @@
           "away": null
         }
       },
+
       {
         "id": "B1",
         "group": "B",
@@ -405,6 +459,7 @@
           "away": null
         }
       },
+
       {
         "id": "B2",
         "group": "B",
@@ -418,6 +473,7 @@
           "away": null
         }
       },
+
       {
         "id": "B3",
         "group": "B",
@@ -431,6 +487,7 @@
           "away": null
         }
       },
+
       {
         "id": "B4",
         "group": "B",
@@ -444,6 +501,7 @@
           "away": null
         }
       },
+
       {
         "id": "B5",
         "group": "B",
@@ -457,6 +515,7 @@
           "away": null
         }
       },
+
       {
         "id": "B6",
         "group": "B",
@@ -470,6 +529,7 @@
           "away": null
         }
       },
+
       {
         "id": "C1",
         "group": "C",
@@ -483,6 +543,7 @@
           "away": null
         }
       },
+
       {
         "id": "C2",
         "group": "C",
@@ -496,6 +557,7 @@
           "away": null
         }
       },
+
       {
         "id": "C3",
         "group": "C",
@@ -509,6 +571,7 @@
           "away": null
         }
       },
+
       {
         "id": "C4",
         "group": "C",
@@ -522,6 +585,7 @@
           "away": null
         }
       },
+
       {
         "id": "C5",
         "group": "C",
@@ -535,6 +599,7 @@
           "away": null
         }
       },
+
       {
         "id": "C6",
         "group": "C",
@@ -548,6 +613,7 @@
           "away": null
         }
       },
+
       {
         "id": "D1",
         "group": "D",
@@ -561,6 +627,7 @@
           "away": null
         }
       },
+
       {
         "id": "D2",
         "group": "D",
@@ -574,6 +641,7 @@
           "away": null
         }
       },
+
       {
         "id": "D3",
         "group": "D",
@@ -587,6 +655,7 @@
           "away": null
         }
       },
+
       {
         "id": "D4",
         "group": "D",
@@ -600,6 +669,7 @@
           "away": null
         }
       },
+
       {
         "id": "D5",
         "group": "D",
@@ -613,6 +683,7 @@
           "away": null
         }
       },
+
       {
         "id": "D6",
         "group": "D",
@@ -626,6 +697,7 @@
           "away": null
         }
       },
+
       {
         "id": "E1",
         "group": "E",
@@ -639,6 +711,7 @@
           "away": null
         }
       },
+
       {
         "id": "E2",
         "group": "E",
@@ -652,6 +725,7 @@
           "away": null
         }
       },
+
       {
         "id": "E3",
         "group": "E",
@@ -665,6 +739,7 @@
           "away": null
         }
       },
+
       {
         "id": "E4",
         "group": "E",
@@ -678,6 +753,7 @@
           "away": null
         }
       },
+
       {
         "id": "E5",
         "group": "E",
@@ -691,6 +767,7 @@
           "away": null
         }
       },
+
       {
         "id": "E6",
         "group": "E",
@@ -704,6 +781,7 @@
           "away": null
         }
       },
+
       {
         "id": "F1",
         "group": "F",
@@ -717,6 +795,7 @@
           "away": null
         }
       },
+
       {
         "id": "F2",
         "group": "F",
@@ -730,6 +809,7 @@
           "away": null
         }
       },
+
       {
         "id": "F3",
         "group": "F",
@@ -743,6 +823,7 @@
           "away": null
         }
       },
+
       {
         "id": "F4",
         "group": "F",
@@ -756,6 +837,7 @@
           "away": null
         }
       },
+
       {
         "id": "F5",
         "group": "F",
@@ -769,6 +851,7 @@
           "away": null
         }
       },
+
       {
         "id": "F6",
         "group": "F",
@@ -782,6 +865,7 @@
           "away": null
         }
       },
+
       {
         "id": "G1",
         "group": "G",
@@ -795,6 +879,7 @@
           "away": null
         }
       },
+
       {
         "id": "G2",
         "group": "G",
@@ -808,6 +893,7 @@
           "away": null
         }
       },
+
       {
         "id": "G3",
         "group": "G",
@@ -821,6 +907,7 @@
           "away": null
         }
       },
+      
       {
         "id": "G4",
         "group": "G",
@@ -834,6 +921,7 @@
           "away": null
         }
       },
+
       {
         "id": "G5",
         "group": "G",
@@ -847,6 +935,7 @@
           "away": null
         }
       },
+
       {
         "id": "G6",
         "group": "G",
@@ -860,6 +949,7 @@
           "away": null
         }
       },
+
       {
         "id": "H1",
         "group": "H",
@@ -873,6 +963,7 @@
           "away": null
         }
       },
+
       {
         "id": "H2",
         "group": "H",
@@ -886,6 +977,7 @@
           "away": null
         }
       },
+
       {
         "id": "H3",
         "group": "H",
@@ -899,6 +991,7 @@
           "away": null
         }
       },
+
       {
         "id": "H4",
         "group": "H",
@@ -912,6 +1005,7 @@
           "away": null
         }
       },
+
       {
         "id": "H5",
         "group": "H",
@@ -925,6 +1019,7 @@
           "away": null
         }
       },
+
       {
         "id": "H6",
         "group": "H",
@@ -938,6 +1033,7 @@
           "away": null
         }
       },
+
       {
         "id": "I1",
         "group": "I",
@@ -951,6 +1047,7 @@
           "away": null
         }
       },
+
       {
         "id": "I2",
         "group": "I",
@@ -964,6 +1061,7 @@
           "away": null
         }
       },
+
       {
         "id": "I3",
         "group": "I",
@@ -977,6 +1075,7 @@
           "away": null
         }
       },
+      
       {
         "id": "I4",
         "group": "I",
@@ -990,6 +1089,7 @@
           "away": null
         }
       },
+
       {
         "id": "I5",
         "group": "I",
@@ -1003,6 +1103,7 @@
           "away": null
         }
       },
+
       {
         "id": "I6",
         "group": "I",
@@ -1016,6 +1117,7 @@
           "away": null
         }
       },
+
       {
         "id": "J1",
         "group": "J",
@@ -1029,6 +1131,7 @@
           "away": null
         }
       },
+
       {
         "id": "J2",
         "group": "J",
@@ -1042,6 +1145,7 @@
           "away": null
         }
       },
+
       {
         "id": "J3",
         "group": "J",
@@ -1055,6 +1159,7 @@
           "away": null
         }
       },
+
       {
         "id": "J4",
         "group": "J",
@@ -1068,6 +1173,7 @@
           "away": null
         }
       },
+
       {
         "id": "J5",
         "group": "J",
@@ -1081,6 +1187,7 @@
           "away": null
         }
       },
+
       {
         "id": "J6",
         "group": "J",
@@ -1094,6 +1201,7 @@
           "away": null
         }
       },
+
       {
         "id": "K1",
         "group": "K",
@@ -1107,6 +1215,7 @@
           "away": null
         }
       },
+
       {
         "id": "K2",
         "group": "K",
@@ -1120,6 +1229,7 @@
           "away": null
         }
       },
+
       {
         "id": "K3",
         "group": "K",
@@ -1133,6 +1243,7 @@
           "away": null
         }
       },
+
       {
         "id": "K4",
         "group": "K",
@@ -1146,6 +1257,7 @@
           "away": null
         }
       },
+
       {
         "id": "K5",
         "group": "K",
@@ -1159,6 +1271,7 @@
           "away": null
         }
       },
+
       {
         "id": "K6",
         "group": "K",
@@ -1172,6 +1285,7 @@
           "away": null
         }
       },
+
       {
         "id": "L1",
         "group": "L",
@@ -1185,6 +1299,7 @@
           "away": null
         }
       },
+
       {
         "id": "L2",
         "group": "L",
@@ -1198,6 +1313,7 @@
           "away": null
         }
       },
+
       {
         "id": "L3",
         "group": "L",
@@ -1211,6 +1327,7 @@
           "away": null
         }
       },
+
       {
         "id": "L4",
         "group": "L",
@@ -1224,6 +1341,7 @@
           "away": null
         }
       },
+
       {
         "id": "L5",
         "group": "L",
@@ -1237,6 +1355,7 @@
           "away": null
         }
       },
+
       {
         "id": "L6",
         "group": "L",
@@ -1251,6 +1370,7 @@
         }
       }
     ],
+
     "knockout": [
       {
         "id": "M73",
@@ -1264,6 +1384,7 @@
           "away": null
         }
       },
+
       {
         "id": "M74",
         "phase": "32avos de final",
@@ -1276,6 +1397,7 @@
           "away": null
         }
       },
+
       {
         "id": "M75",
         "phase": "32avos de final",
@@ -1288,6 +1410,7 @@
           "away": null
         }
       },
+
       {
         "id": "M76",
         "phase": "32avos de final",
@@ -1300,6 +1423,7 @@
           "away": null
         }
       },
+
       {
         "id": "M77",
         "phase": "32avos de final",
@@ -1312,6 +1436,7 @@
           "away": null
         }
       },
+
       {
         "id": "M78",
         "phase": "32avos de final",
@@ -1324,6 +1449,7 @@
           "away": null
         }
       },
+
       {
         "id": "M79",
         "phase": "32avos de final",
@@ -1336,6 +1462,7 @@
           "away": null
         }
       },
+
       {
         "id": "M80",
         "phase": "32avos de final",
@@ -1348,6 +1475,7 @@
           "away": null
         }
       },
+
       {
         "id": "M81",
         "phase": "32avos de final",
@@ -1360,6 +1488,7 @@
           "away": null
         }
       },
+
       {
         "id": "M82",
         "phase": "32avos de final",
@@ -1372,6 +1501,7 @@
           "away": null
         }
       },
+
       {
         "id": "M83",
         "phase": "32avos de final",
@@ -1384,6 +1514,7 @@
           "away": null
         }
       },
+
       {
         "id": "M84",
         "phase": "32avos de final",
@@ -1396,6 +1527,7 @@
           "away": null
         }
       },
+
       {
         "id": "M85",
         "phase": "32avos de final",
@@ -1408,6 +1540,7 @@
           "away": null
         }
       },
+
       {
         "id": "M86",
         "phase": "32avos de final",
@@ -1420,6 +1553,7 @@
           "away": null
         }
       },
+
       {
         "id": "M87",
         "phase": "32avos de final",
@@ -1432,6 +1566,7 @@
           "away": null
         }
       },
+
       {
         "id": "M88",
         "phase": "32avos de final",
@@ -1444,6 +1579,7 @@
           "away": null
         }
       },
+
       {
         "id": "M89",
         "phase": "Oitavas de final",
@@ -1456,6 +1592,7 @@
           "away": null
         }
       },
+
       {
         "id": "M90",
         "phase": "Oitavas de final",
@@ -1468,6 +1605,7 @@
           "away": null
         }
       },
+
       {
         "id": "M91",
         "phase": "Oitavas de final",
@@ -1480,6 +1618,7 @@
           "away": null
         }
       },
+
       {
         "id": "M92",
         "phase": "Oitavas de final",
@@ -1492,6 +1631,7 @@
           "away": null
         }
       },
+
       {
         "id": "M93",
         "phase": "Oitavas de final",
@@ -1504,6 +1644,7 @@
           "away": null
         }
       },
+
       {
         "id": "M94",
         "phase": "Oitavas de final",
@@ -1516,6 +1657,7 @@
           "away": null
         }
       },
+
       {
         "id": "M95",
         "phase": "Oitavas de final",
@@ -1528,6 +1670,7 @@
           "away": null
         }
       },
+
       {
         "id": "M96",
         "phase": "Oitavas de final",
@@ -1540,6 +1683,7 @@
           "away": null
         }
       },
+
       {
         "id": "M97",
         "phase": "Quartas de final",
@@ -1552,6 +1696,7 @@
           "away": null
         }
       },
+
       {
         "id": "M98",
         "phase": "Quartas de final",
@@ -1564,6 +1709,7 @@
           "away": null
         }
       },
+
       {
         "id": "M99",
         "phase": "Quartas de final",
@@ -1576,6 +1722,7 @@
           "away": null
         }
       },
+
       {
         "id": "M100",
         "phase": "Quartas de final",
@@ -1588,6 +1735,7 @@
           "away": null
         }
       },
+
       {
         "id": "M101",
         "phase": "Semifinais",
@@ -1600,6 +1748,7 @@
           "away": null
         }
       },
+
       {
         "id": "M102",
         "phase": "Semifinais",
@@ -1612,6 +1761,7 @@
           "away": null
         }
       },
+
       {
         "id": "M103",
         "phase": "Disputa 3º Lugar",
@@ -1624,6 +1774,7 @@
           "away": null
         }
       },
+      
       {
         "id": "M104",
         "phase": "Final",
