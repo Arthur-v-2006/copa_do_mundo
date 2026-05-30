@@ -1,4 +1,3 @@
-/* app.js */
 const DATA_URL = "dados.json";
 const GROUP_ORDER = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
 const KNOCKOUT_PHASES = ["32avos de final", "Oitavas de final", "Quartas de final", "Semifinais", "Disputa 3º Lugar", "Final"];
@@ -6,6 +5,8 @@ const SPECIAL_FLAGS = {
   "gb-eng": "https://upload.wikimedia.org/wikipedia/en/b/be/Flag_of_England.svg",
   "gb-sct": "https://upload.wikimedia.org/wikipedia/commons/1/10/Flag_of_Scotland.svg"
 };
+
+let dadosGlobais = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   iniciarAplicacao();
@@ -28,6 +29,10 @@ async function iniciarAplicacao() {
     }
 
     const data = await response.json();
+    dadosGlobais = data;
+    
+    carregarDadosSalvos();
+    
     const state = buildState(data);
     renderPage(state);
   } catch (error) {
@@ -423,7 +428,7 @@ function renderSchedulePage(state) {
       <div class="section-header">
         <div>
           <h2>Mata-mata</h2>
-          <p>Os confrontos da chave usam os slots calculados pelo JavaScript.</p>
+          <p>Clique em qualquer jogo para editar o placar!</p>
         </div>
       </div>
       <div class="schedule-grid">
@@ -452,7 +457,8 @@ function renderKnockoutPage(state) {
       <strong>Formato Copa 2026</strong>
       <p>
         Com 48 seleções, a chave começa nos 32 avos de final e segue para oitavas, quartas, semifinais e final.
-        Os 12 líderes, 12 vice-líderes e os 8 melhores terceiros colocados formam os 32 classificados
+        Os 12 líderes, 12 vice-líderes e os 8 melhores terceiros colocados formam os 32 classificados.
+        <strong>Clique em qualquer confronto para editar o placar!</strong>
       </p>
     </section>
 
@@ -514,7 +520,7 @@ function renderMatchCard(item) {
   const scoreLabel = formatScore(fixture);
 
   return `
-    <article class="match-card">
+    <article class="match-card" data-jogo-id="${fixture.id}" onclick="editarPlacar('${fixture.id}')">
       <div class="match-meta">
         <span>${formatDate(fixture.date)}</span>
         <span>${fixture.time}</span>
@@ -531,11 +537,11 @@ function renderMatchCard(item) {
 
 function renderBracketMatch(fixture) {
   const winnerText = fixture.winner ? `
-    <div class="winner-tag">Classificado: ${fixture.winner.name}</div>
+    <div class="winner-tag">🏆 Classificado: ${fixture.winner.name}</div>
   ` : "";
 
   return `
-    <article class="bracket-match">
+    <article class="bracket-match" data-jogo-id="${fixture.id}" onclick="editarPlacar('${fixture.id}')">
       <div class="bracket-top">
         <span>${fixture.id}</span>
         <span>${formatDate(fixture.date)} • ${fixture.time}</span>
@@ -606,4 +612,302 @@ function formatScore(fixture) {
 
 function displayScoreSide(value) {
   return Number.isInteger(value) ? value : "—";
+}
+
+let modalAtivo = null;
+let jogoEditando = null;
+let limpezaCompleta = false;
+
+function editarPlacar(jogoId) {
+  if (!dadosGlobais) {
+    console.error("Dados não carregados");
+    return;
+  }
+  
+  let jogo = dadosGlobais.fixtures.groupStage.find(f => f.id === jogoId);
+  let isKnockout = false;
+  
+  if (!jogo) {
+    jogo = dadosGlobais.fixtures.knockout.find(f => f.id === jogoId);
+    isKnockout = true;
+  }
+  
+  if (!jogo) {
+    console.error("Jogo não encontrado");
+    return;
+  }
+  
+  const homeTeam = getTeamByCode(jogo.home);
+  const awayTeam = getTeamByCode(jogo.away);
+  
+  const homeNome = homeTeam ? homeTeam.name : (jogo.homeSlot || "Time A");
+  const awayNome = awayTeam ? awayTeam.name : (jogo.awaySlot || "Time B");
+  const homeFlag = homeTeam ? homeTeam.flagCode : null;
+  const awayFlag = awayTeam ? awayTeam.flagCode : null;
+  
+  const golsAtuaisHome = jogo.score?.home !== null && jogo.score?.home !== undefined ? jogo.score.home : 0;
+  const golsAtuaisAway = jogo.score?.away !== null && jogo.score?.away !== undefined ? jogo.score.away : 0;
+  
+  jogoEditando = { jogo, isKnockout, homeNome, awayNome, homeFlag, awayFlag };
+  
+  criarModal(homeNome, awayNome, homeFlag, awayFlag, golsAtuaisHome, golsAtuaisAway);
+}
+
+function criarModal(homeNome, awayNome, homeFlag, awayFlag, golsHome, golsAway) {
+  limpezaCompleta = false;
+  
+  if (modalAtivo) {
+    modalAtivo.remove();
+  }
+  
+  const bandeiraHome = homeFlag ? `<img src="${flagUrl(homeFlag)}" style="width:42px;height:28px;border-radius:6px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,0.3);" onerror="this.style.display='none'">` : "🏠";
+  const bandeiraAway = awayFlag ? `<img src="${flagUrl(awayFlag)}" style="width:42px;height:28px;border-radius:6px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,0.3);" onerror="this.style.display='none'">` : "✈️";
+  
+  const modalHTML = `
+    <div class="modal-overlay" id="placarModal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3>Editar Placar</h3>
+          <button class="modal-close" onclick="fecharModal()">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="confronto-nomes opcao2">
+            <div class="time-casa">
+              <div class="flag-top">${bandeiraHome}</div>
+              <div class="time-nome">${homeNome}</div>
+            </div>
+            <div class="confronto-vs">VS</div>
+            <div class="time-fora">
+              <div class="flag-top">${bandeiraAway}</div>
+              <div class="time-nome">${awayNome}</div>
+            </div>
+          </div>
+          
+          <div class="placar-inputs">
+            <div class="input-group">
+              <label>Gols</label>
+              <input type="number" id="golsCasa" value="${golsHome}" min="0" step="1">
+            </div>
+            <div class="placar-x">×</div>
+            <div class="input-group">
+              <label>Gols</label>
+              <input type="number" id="golsFora" value="${golsAway}" min="0" step="1">
+            </div>
+          </div>
+          
+          <!-- Botão Limpar -->
+          <div class="limpar-container">
+            <button type="button" class="modal-btn-limpar" onclick="limparPlacar()">
+              🧹 Limpar placar
+            </button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn modal-btn-cancelar" onclick="fecharModal()">Cancelar</button>
+          <button class="modal-btn modal-btn-salvar" onclick="salvarPlacarModal()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+  modalAtivo = document.getElementById('placarModal');
+  
+  setTimeout(() => {
+    modalAtivo.classList.add('active');
+    const primeiroInput = modalAtivo.querySelector('input');
+    if (primeiroInput) primeiroInput.focus();
+  }, 10);
+  
+  modalAtivo.addEventListener('click', (e) => {
+    if (e.target === modalAtivo) {
+      fecharModal();
+    }
+  });
+  
+  const inputs = modalAtivo.querySelectorAll('input');
+  inputs.forEach(input => {
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        salvarPlacarModal();
+      }
+    });
+  });
+}
+
+function limparPlacar() {
+  const inputCasa = document.getElementById('golsCasa');
+  const inputFora = document.getElementById('golsFora');
+  
+  if (inputCasa && inputFora) {
+    limpezaCompleta = true;
+    
+    inputCasa.value = 0;
+    inputFora.value = 0;
+    
+    const btnLimpar = document.querySelector('.modal-btn-limpar');
+    const textoOriginal = btnLimpar.innerHTML;
+    btnLimpar.innerHTML = '🗑️ Clique em SALVAR para remover o placar';
+    btnLimpar.style.background = 'rgba(239, 51, 64, 0.2)';
+    btnLimpar.style.borderColor = '#ef3340';
+    btnLimpar.style.color = '#ef3340';
+    
+    setTimeout(() => {
+      if (btnLimpar) {
+        btnLimpar.innerHTML = textoOriginal;
+        btnLimpar.style.background = '';
+        btnLimpar.style.borderColor = '';
+        btnLimpar.style.color = '';
+      }
+    }, 2000);
+  }
+}
+
+function fecharModal() {
+  if (modalAtivo) {
+    modalAtivo.classList.remove('active');
+    setTimeout(() => {
+      if (modalAtivo) modalAtivo.remove();
+      modalAtivo = null;
+      jogoEditando = null;
+    }, 300);
+  }
+}
+
+function salvarPlacarModal() {
+  if (!jogoEditando) return;
+  
+  const golsCasa = parseInt(document.getElementById('golsCasa')?.value) || 0;
+  const golsFora = parseInt(document.getElementById('golsFora')?.value) || 0;
+  
+  const { jogo, isKnockout, homeNome, awayNome } = jogoEditando;
+  
+  if (limpezaCompleta) {
+    jogo.score = { home: null, away: null };
+    if (!isKnockout) {
+      jogo.status = "nao_iniciado";
+    }
+    mostrarToast(`Placar de ${homeNome} vs ${awayNome} foi removido!`);
+    
+    limpezaCompleta = false;
+  } 
+  else {
+    jogo.score = { home: golsCasa, away: golsFora };
+    if (!isKnockout) {
+      jogo.status = "finalizado";
+    }
+    
+    if (golsCasa === 0 && golsFora === 0) {
+      mostrarToast(`⚽ ${homeNome} 0 x 0 ${awayNome} - Empate sem gols!`);
+    } else {
+      mostrarToast(`${homeNome} ${golsCasa} x ${golsFora} ${awayNome}`);
+    }
+  }
+  
+  salvarDadosNoLocalStorage();
+  
+  const novoState = buildState(dadosGlobais);
+  renderPage(novoState);
+  
+  fecharModal();
+}
+
+function mostrarToast(mensagem) {
+  const toastExistente = document.querySelector('.toast-mensagem');
+  if (toastExistente) toastExistente.remove();
+  
+  const toast = document.createElement('div');
+  toast.className = 'toast-mensagem';
+  toast.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:1.5rem;">✅</span>
+      <span>${mensagem}</span>
+    </div>
+  `;
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #0a1c33, #07111f);
+    border: 1px solid rgba(102, 226, 155, 0.5);
+    border-radius: 50px;
+    padding: 12px 24px;
+    color: #9ff3bf;
+    font-weight: 600;
+    z-index: 1001;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    animation: fadeInUp 0.3s ease, fadeOut 0.3s ease 2s forwards;
+    font-size: 0.9rem;
+  `;
+  
+  if (!document.querySelector('#toast-animations')) {
+    const style = document.createElement('style');
+    style.id = 'toast-animations';
+    style.textContent = `
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+        to { opacity: 1; transform: translateX(-50%) translateY(0); }
+      }
+      @keyframes fadeOut {
+        to { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    if (toast && toast.parentNode) toast.remove();
+  }, 2500);
+}
+
+function salvarDadosNoLocalStorage() {
+  if (dadosGlobais) {
+    localStorage.setItem("copa2026_dados", JSON.stringify(dadosGlobais));
+    console.log("✅ Dados salvos no localStorage");
+  }
+}
+
+function carregarDadosSalvos() {
+  const salvos = localStorage.getItem("copa2026_dados");
+  if (salvos && dadosGlobais) {
+    try {
+      const dadosSalvos = JSON.parse(salvos);
+      
+      if (dadosSalvos.fixtures && dadosSalvos.fixtures.groupStage) {
+        dadosSalvos.fixtures.groupStage.forEach(jogoSalvo => {
+          const jogoOriginal = dadosGlobais.fixtures.groupStage.find(j => j.id === jogoSalvo.id);
+          if (jogoOriginal && jogoSalvo.score) {
+            jogoOriginal.score = { ...jogoSalvo.score };
+            jogoOriginal.status = jogoSalvo.status;
+          }
+        });
+      }
+      
+      if (dadosSalvos.fixtures && dadosSalvos.fixtures.knockout) {
+        dadosSalvos.fixtures.knockout.forEach(jogoSalvo => {
+          const jogoOriginal = dadosGlobais.fixtures.knockout.find(j => j.id === jogoSalvo.id);
+          if (jogoOriginal && jogoSalvo.score) {
+            jogoOriginal.score = { ...jogoSalvo.score };
+          }
+        });
+      }
+      
+      console.log("✅ Dados carregados do localStorage");
+    } catch (e) {
+      console.error("Erro ao carregar dados salvos:", e);
+    }
+  }
+}
+
+function getTeamByCode(code) {
+  if (!code || !dadosGlobais) return null;
+  for (const group of dadosGlobais.groups) {
+    const team = group.teams.find(t => t.code === code);
+    if (team) return { ...team, name: team.name, flagCode: team.flagCode, code: team.code };
+  }
+  return null;
 }
