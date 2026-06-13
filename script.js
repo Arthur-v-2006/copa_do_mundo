@@ -1,3 +1,4 @@
+// script.js (versão modificada)
 const DATA_URL = "dados.json";
 const GROUP_ORDER = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
 const KNOCKOUT_PHASES = ["32avos de final", "Oitavas de final", "Quartas de final", "Semifinais", "Disputa 3º Lugar", "Final"];
@@ -369,73 +370,79 @@ function renderGroupCard(group, standings) {
 
 function renderSchedulePage(state) {
   const container = document.getElementById("page-content");
-  const groupStageMarkup = GROUP_ORDER.map((groupId) => {
-    const group = state.data.groups.find((item) => item.id === groupId);
-    const groupFixtures = state.data.fixtures.groupStage
-      .filter((fixture) => fixture.group === groupId)
-      .sort((a, b) => a.round - b.round);
-
-    const rounds = [1, 2, 3].map((round) => ({
-      round,
-      matches: groupFixtures.filter((fixture) => fixture.round === round)
-    }));
-
+  
+  const allGroupMatches = state.data.fixtures.groupStage.map(fixture => ({
+    ...fixture,
+    isKnockout: false,
+    homeTeam: state.teamLookup[fixture.home],
+    awayTeam: state.teamLookup[fixture.away]
+  }));
+  
+  const allKnockoutMatches = state.resolvedKnockout.map(fixture => ({
+    ...fixture,
+    isKnockout: true,
+    homeTeam: fixture.homeTeam,
+    awayTeam: fixture.awayTeam
+  }));
+  
+  const allMatches = [...allGroupMatches, ...allKnockoutMatches];
+  
+  const matchesByDate = {};
+  
+  allMatches.forEach(match => {
+    const dateKey = match.date;
+    if (!matchesByDate[dateKey]) {
+      matchesByDate[dateKey] = [];
+    }
+    matchesByDate[dateKey].push(match);
+  });
+  
+  const sortedDates = Object.keys(matchesByDate).sort();
+  
+  sortedDates.forEach(dateKey => {
+    matchesByDate[dateKey].sort((a, b) => {
+      return a.time.localeCompare(b.time);
+    });
+  });
+  
+  const scheduleByDateHTML = sortedDates.map(dateKey => {
+    const matches = matchesByDate[dateKey];
+    const formattedDate = formatDateBR(dateKey);
+    
     return `
-      <article class="section-card schedule-group">
-        <div class="phase-title">
-          <h2>Grupo ${groupId}</h2>
-          <span>${group.teams.map((team) => team.name).join(" • ")}</span>
-        </div>
-        ${rounds.map((round) => `
-          <div class="round-block">
-            <h3 class="round-title">Rodada ${round.round}</h3>
-            <div class="matches-grid">
-              ${round.matches.map((fixture) => renderMatchCard({
-                fixture,
-                homeTeam: state.teamLookup[fixture.home],
-                awayTeam: state.teamLookup[fixture.away]
-              })).join("")}
-            </div>
-          </div>
-        `).join("")}
-      </article>
-    `;
-  }).join("");
-
-  const knockoutMarkup = KNOCKOUT_PHASES.map((phase) => {
-    const phaseMatches = state.resolvedKnockout.filter((fixture) => fixture.phase === phase);
-
-    return `
-      <section class="phase-wrapper">
-        <div class="phase-title">
-          <h2>${phase}</h2>
-          <span>${phaseMatches.length} jogos</span>
+      <section class="section-card schedule-date-group">
+        <div class="phase-title date-header">
+          <h2>📅 ${formattedDate}</h2>
+          <span>${matches.length} ${matches.length === 1 ? 'jogo' : 'jogos'}</span>
         </div>
         <div class="matches-grid">
-          ${phaseMatches.map((fixture) => renderMatchCard(fixture)).join("")}
+          ${matches.map(match => renderMatchCard({
+            fixture: match,
+            homeTeam: match.homeTeam,
+            awayTeam: match.awayTeam
+          })).join("")}
         </div>
       </section>
     `;
   }).join("");
-
+  
   container.innerHTML = `
-
     <section class="schedule-grid">
-      ${groupStageMarkup}
-    </section>
-
-    <section class="section-card schedule-group">
-      <div class="section-header">
-        <div>
-          <h2>Mata-mata</h2>
-          <p>Clique em qualquer jogo para editar o placar!</p>
-        </div>
-      </div>
-      <div class="schedule-grid">
-        ${knockoutMarkup}
-      </div>
+      ${scheduleByDateHTML}
     </section>
   `;
+}
+
+function formatDateBR(dateString) {
+  const [year, month, day] = dateString.split("-").map(Number);
+  const date = new Date(year, month - 1, day, 12, 0, 0);
+  
+  const meses = [
+    "janeiro", "fevereiro", "março", "abril", "maio", "junho",
+    "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+  ];
+  
+  return `${day} de ${meses[month - 1]} de ${year}`;
 }
 
 function renderKnockoutPage(state) {
@@ -518,13 +525,18 @@ function renderMatchCard(item) {
   const homeTeam = item.homeTeam || fixture.homeTeam || null;
   const awayTeam = item.awayTeam || fixture.awayTeam || null;
   const scoreLabel = formatScore(fixture);
+  
+  let locationOrPhase = fixture.stadium || fixture.phase || "";
+  if (!locationOrPhase && fixture.group) {
+    locationOrPhase = `Grupo ${fixture.group}`;
+  }
 
   return `
     <article class="match-card" data-jogo-id="${fixture.id}" onclick="editarPlacar('${fixture.id}')">
       <div class="match-meta">
-        <span>${formatDate(fixture.date)}</span>
-        <span>${fixture.time}</span>
-        <span>${fixture.stadium || fixture.phase || `Grupo ${fixture.group}`}</span>
+        <span>🕐 ${fixture.time}</span>
+        ${locationOrPhase ? `<span>🏟️ ${locationOrPhase}</span>` : ""}
+        ${!fixture.isKnockout && fixture.group ? `<span>📋 Grupo ${fixture.group}</span>` : ""}
       </div>
       <div class="match-body">
         ${renderMatchTeam(homeTeam, fixture.homeSlot)}
